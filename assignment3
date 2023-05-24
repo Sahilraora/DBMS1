@@ -1,0 +1,80 @@
+
+
+
+mysql> use sample;
+Database changed
+
+mysql> create table emp(eno int,ename varchar(20),desg varchar(20),salary int);
+Query OK, 0 rows affected 
+
+mysql> create table emp_old(eno int,ename varchar(20),desg varchar(20),salary int);
+Query OK, 0 rows affected 
+
+mysql> show tables;
++------------------+
+| Tables_in_sample |
++------------------+
+| emp              |
+| emp_old          |
++------------------+
+
+#create trigger on emp table
+
+delimiter $$
+create trigger sample 
+before delete on emp
+for each row 
+begin
+insert into emp_old(eno,ename,desg,salary) values(old.eno,old.ename,old.desg,old.salary);
+end $$
+delimiter ;
+
+
+#call trigger
+source /home/student/sampletrigger.sql
+
+#inserting into emp table
+mysql> insert into emp values(1,'sai','manager',45000);
+Query OK, 1 row affected 
+
+mysql> insert into emp values(2,'SHIV','HOD',30000);
+Query OK, 1 row affected 
+
+mysql> insert into emp values(3,'Raj','Professor',30000);
+Query OK, 1 row affected
+
+mysql> select * from emp;
++------+-------+-----------+--------+
+| eno  | ename | desg      | salary |
++------+-------+-----------+--------+
+|    1 | sai   | manager   |  45000 |
+|    2 | SHIV  | HOD       |  30000 |
+|    3 | Raj   | Professor |  30000 |
++------+-------+-----------+--------+
+
+mysql> delete from emp where eno=3;
+Query OK, 1 row affected 
+
+mysql> select * from emp;
++------+-------+---------+--------+
+| eno  | ename | desg    | salary |
++------+-------+---------+--------+
+|    1 | sai   | manager |  45000 |
+|    2 | SHIV  | HOD     |  30000 |
++------+-------+---------+--------+
+
+#emp no 3 is deleted and it is inserted in emp_old table
+mysql> select * from emp_old;
++------+-------+-----------+--------+
+| eno  | ename | desg      | salary |
++------+-------+-----------+--------+
+|    3 | Raj   | Professor |  30000 |
++------+-------+-----------+--------+
+
+
+#conclusion :
+from the given assignment we learned how to create and use trigger for the table emp .
+In this we saw how the trigger works for the data deleted from one table and is inserted in another table.
+source /home/student/sampletrigger.sql is used to invoke the trigger in the program.
+here,/home/student is path for the trigger 
+and sampletrigger.sql is the trigger name with '.sql' extension
