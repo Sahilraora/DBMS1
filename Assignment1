@@ -1,0 +1,112 @@
+                                                 ASSIGNMENT 1
+                                                 
+Objective:To study various commands in MySQL LIKE CREATE,INSERT,DELETE,UPDATE,SELECT
+Author:Bhalerao Sahil Dnyaneshwar 
+Roll no: 15
+PRN: UCS21M1015
+Batch: AS1
+
+
+#creating database
+mysql> create database program;
+mysql> use program;
+Database changed
+
+
+#creating table
+mysql> create table student(rollno int,name varchar(20),prn varchar(20),department varchar(20),division varchar(10));
+Query OK, 0 rows affected 
+
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| rollno     | int         | YES  | PRI | NULL    |       |
+| name       | varchar(20) | YES  |     | NULL    |       |
+| prn        | varchar(20) | YES  |     | NULL    |       |
+| department | varchar(20) | YES  |     | NULL    |       |
+| division   | varchar(10) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set
+
+
+#insert into table 
+mysql> insert into student values(1,'shiv','UCS21F1066','computer','A');
+Query OK, 1 row affected 
+
+mysql> insert into student values(3,'mani','UCS21F1061','computer','A');
+Query OK, 1 row affected 
+
+mysql> insert into student values(7,'prayog','UCS21F1088','computer','B');
+Query OK, 1 row affected 
+
+mysql> insert into student values(23,'Jit','UME21F1023','mechanical','C');
+Query OK, 1 row affected 
+
+
+#show data in table
+mysql> select * from student;
++--------+--------+------------+------------+----------+
+| rollno | name   | prn        | department | division |
++--------+--------+------------+------------+----------+
+|      1 | shiv   | UCS21F1066 | computer   | A        |
+|      3 | mani   | UCS21F1061 | computer   | A        |
+|      7 | prayog | UCS21F1088 | computer   | B        |
+|     23 | Jit    | UME21F1023 | mechanical | C        |
++--------+--------+------------+------------+----------+
+
+
+#delete record from table
+mysql> delete from student where rollno=7;
+Query OK, 1 row affected
+
+mysql> select * from student;
++--------+------+------------+------------+----------+
+| rollno | name | prn        | department | division |
++--------+------+------------+------------+----------+
+|      1 | shiv | UCS21F1066 | computer   | A        |
+|      3 | mani | UCS21F1061 | computer   | A        |
+|     23 | Jit  | UME21F1023 | mechanical | C        |
++--------+------+------------+------------+----------+
+3 rows in set
+
+
+#update table
+mysql> update student set prn='UCS21F1001' where rollno=1;
+Query OK, 1 row affected 
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++--------+------+------------+------------+----------+
+| rollno | name | prn        | department | division |
++--------+------+------------+------------+----------+
+|      1 | shiv | UCS21F1001 | computer   | A        |
+|      3 | mani | UCS21F1061 | computer   | A        |
+|     23 | Jit  | UME21F1023 | mechanical | C        |
++--------+------+------------+------------+----------+
+3 rows in set
+
+mysql> select * from student;
++--------+------+------------+------------+----------+
+| rollno | name | prn        | department | division |
++--------+------+------------+------------+----------+
+|      1 | shiv | UCS21F1001 | computer   | A        |
+|     23 | Jit  | UME21F1023 | mechanical | C        |
++--------+------+------------+------------+----------+
+2 rows in set
+
+#select from table
+mysql> select rollno,name from student;
++--------+------+
+| rollno | name |
++--------+------+
+|      1 | shiv |
+|     23 | Jit  |
++--------+------+
+2 rows in set 
+
+
+#conclusion:
+from the above assignment we learned how to create database and table and also learned about inserting, deleting,updating and selecting data from the table.
+
