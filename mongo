@@ -1,0 +1,158 @@
+> use MMS;
+switched to db MMS
+
+
+> db.movie.insert(name:"RRR",director:"SSR",budget:"150 cores", collection:"300 cores",rating :5);
+2023-04-27T13:40:32.278+0530 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:20
+> db.movie.find();
+> db.movie.find()
+> db.movie.find().pretty();
+> db.movie.insert({name:"RRR",director:"SSR",budget:"150 cores", collection:"300 cores",rating :5});
+WriteResult({ "nInserted" : 1 })
+> db.movie.find().pretty();
+{
+	"_id" : ObjectId("644a2e55c082fab17678de83"),
+	"name" : "RRR",
+	"director" : "SSR",
+	"budget" : "150 cores",
+	"collection" : "300 cores",
+	"rating" : 5
+}
+
+
+> db.movie.insertMany([{name:"SOY",director:"KJ",budget:"100 cores",collection:"100 cores",rating:3},{name:"SOY2",director:"KJ",budget:"150 cores",collection:"250 cores",rating:4}]);
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("6451eb81c43edbe78b1c844b"),
+		ObjectId("6451eb81c43edbe78b1c844c")
+	]
+}
+> db.movie.find().pretty()
+{
+	"_id" : ObjectId("644a2e55c082fab17678de83"),
+	"name" : "RRR",
+	"director" : "SSR",
+	"budget" : "150 cores",
+	"collection" : "300 cores",
+	"rating" : 5
+}
+{
+	"_id" : ObjectId("644a3169c082fab17678de85"),
+	"name" : "kgf2",
+	"director" : "SSN",
+	"budget" : "350 cores",
+	"collection" : "550 cores",
+	"rating" : 5
+}
+{
+	"_id" : ObjectId("6451eb81c43edbe78b1c844b"),
+	"name" : "SOY",
+	"director" : "KJ",
+	"budget" : "100 cores",
+	"collection" : "100 cores",
+	"rating" : 3
+}
+{
+	"_id" : ObjectId("6451eb81c43edbe78b1c844c"),
+	"name" : "SOY2",
+	"director" : "KJ",
+	"budget" : "150 cores",
+	"collection" : "250 cores",
+	"rating" : 4
+}
+
+db.movie.updateOne({name:"SOY2"},{$set: {"director":"karan","collection":"300 cores", rating:5},})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.movie.find().pretty()
+{
+	"_id" : ObjectId("644a2e55c082fab17678de83"),
+	"name" : "RRR",
+	"director" : "SSR",
+	"budget" : "150 cores",
+	"collection" : "300 cores",
+	"rating" : 5
+}
+{
+	"_id" : ObjectId("644a3169c082fab17678de85"),
+	"name" : "kgf2",
+	"director" : "SSN",
+	"budget" : "350 cores",
+	"collection" : "550 cores",
+	"rating" : 5
+}
+{
+	"_id" : ObjectId("6451eb81c43edbe78b1c844b"),
+	"name" : "SOY",
+	"director" : "KJ",
+	"budget" : "100 cores",
+	"collection" : "100 cores",
+	"rating" : 3
+}
+
+
+db.movie.deleteOne({ director : "KJ" })
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.movie.find().pretty()
+{
+	"_id" : ObjectId("644a2e55c082fab17678de83"),
+	"name" : "RRR",
+	"director" : "SSR",
+	"budget" : "150 cores",
+	"collection" : "300 cores",
+	"rating" : 5
+}
+{
+	"_id" : ObjectId("644a3169c082fab17678de85"),
+	"name" : "kgf2",
+	"director" : "SSN",
+	"budget" : "350 cores",
+	"collection" : "550 cores",
+	"rating" : 5
+}
+> 
+db.movie.updateMany({"rating":5} ,{$set:{"status":"hit"}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+> db.movie.find().pretty()
+{
+	"_id" : ObjectId("644a2e55c082fab17678de83"),
+	"name" : "RRR",
+	"director" : "SSR",
+	"budget" : "150 cores",
+	"collection" : "300 cores",
+	"rating" : 5,
+	"status" : "hit"
+}
+{
+	"_id" : ObjectId("644a3169c082fab17678de85"),
+	"name" : "kgf2",
+	"director" : "SSN",
+	"budget" : "350 cores",
+	"collection" : "550 cores",
+	"rating" : 5,
+	"status" : "hit"
+}
+
+db.movie.deleteMany({ "rating":5 })
+{ "acknowledged" : true, "deletedCount" : 2 }
+> db.movie.find().pretty()
+{
+	"_id" : ObjectId("6451f6acc43edbe78b1c844d"),
+	"name" : "SOY",
+	"director" : "KJ",
+	"budget" : "100 cores",
+	"collection" : "100 cores",
+	"rating" : 3
+}
+{
+	"_id" : ObjectId("6451f6acc43edbe78b1c844e"),
+	"name" : "SOY2",
+	"director" : "KJ",
+	"budget" : "150 cores",
+	"collection" : "250 cores",
+	"rating" : 4
+}
+> 
+
+
+
